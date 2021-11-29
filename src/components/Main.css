@@ -1,0 +1,54 @@
+html, body {
+    min-height: 100vh;
+    background: #171616;
+  }
+
+.react-tabs__tab-list {
+    border-bottom: 1px #f5bf42 !important;
+    margin: 0 0 10px;
+    padding: 0;
+  }
+
+.react-tabs__tab--selected {
+    background: #f5bf42 !important;
+    border-color: #f5bf42 !important;
+    color: black;
+    border-radius: 5px 5px 0 0;
+  }
+
+.background{
+    background-color: #171616;
+    color: aliceblue;
+}
+
+.title{
+    color: #f5bf42;
+    font-size: 20px;
+    align-self: flex-end;
+    font-weight: bold;
+    font-family:  'dm sans',sans-serif;
+}
+
+.table-div{
+    height:100%;
+    flex: 1 1 auto;
+    background: #171616;
+    overflow-y: auto;
+}
+.table{
+    background-color: #171616;
+    opacity: 90%;
+    color: aliceblue !important;
+    font-style: normal;
+    text-decoration-color: aliceblue;
+    font-family:  'dm sans',sans-serif;
+}
+
+th{
+    color:aliceblue !important;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif !important
+}
+
+.head{
+    font-weight: bold;
+}
