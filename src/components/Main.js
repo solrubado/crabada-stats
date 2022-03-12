@@ -51,22 +51,43 @@ class Main extends React.Component {
 
         switch (tab) {
             case 'all':
-                filter = this.state.crabadas;
-                this.setState({filterCrabadas: filter})
-                break;
+              filter = this.state.crabadas;
+              this.setState({filterCrabadas: filter})
+              break;
             case 'pure bulk':
-                filter = this.state.crabadas.filter(crabada => crabada.pure_number === 6 && crabada.class_name === 'BULK' && 
-                crabada.breed_count < 2)
-                this.setState({filterCrabadas: filter})
-                break;
+              filter = this.state.crabadas.filter(crabada => crabada.pure_number === 6 && crabada.class_name === 'BULK')
+              this.setState({filterCrabadas: filter})
+              break;
             case 'pure prime':
-                filter = this.state.crabadas.filter(crabada => crabada.pure_number === 6 && crabada.class_name === 'PRIME' && 
-                crabada.breed_count < 2)
-                this.setState({filterCrabadas: filter})
-                break
+              filter = this.state.crabadas.filter(crabada => crabada.pure_number === 6 && crabada.class_name === 'PRIME')
+              this.setState({filterCrabadas: filter})
+              break
+            case 'pure surge':
+              filter = this.state.crabadas.filter(crabada => crabada.pure_number === 6 && crabada.class_name === 'SURGE')
+              this.setState({filterCrabadas: filter})
+              break
+            case 'pure sunken':
+              filter = this.state.crabadas.filter(crabada => crabada.pure_number === 6 && crabada.class_name === 'SUNKEN')
+              this.setState({filterCrabadas: filter})
+              break
+            case 'pure craboid':
+              filter = this.state.crabadas.filter(crabada => crabada.pure_number === 6 && crabada.class_name === 'CRABOID')
+              this.setState({filterCrabadas: filter})
+              break
+            case 'pure ruined':
+              filter = this.state.crabadas.filter(crabada => crabada.pure_number === 6 && crabada.class_name === 'RUINED')
+              this.setState({filterCrabadas: filter})
+              break
+            case 'pure gem':
+              filter = this.state.crabadas.filter(crabada => crabada.pure_number === 6 && crabada.class_name === 'GEM')
+              this.setState({filterCrabadas: filter})
+              break
+            case 'pure organic':
+              filter = this.state.crabadas.filter(crabada => crabada.pure_number === 6 && crabada.class_name === 'ORGANIC')
+              this.setState({filterCrabadas: filter})
+              break
           }
 
-          
       }
 
     componentDidMount() {
@@ -92,6 +113,18 @@ class Main extends React.Component {
                     onClick = {()=>this.changeTab('pure bulk')}>Pure Bulk</Tab>
                     <Tab style={{fontWeight:'bold', fontFamily:'Gill Sans'}}
                      onClick = {()=>this.changeTab('pure prime')}>Pure Prime</Tab>
+                    <Tab style={{fontWeight:'bold', fontFamily:'Gill Sans'}}
+                     onClick = {()=>this.changeTab('pure surge')}>Pure Surge</Tab>
+                    <Tab style={{fontWeight:'bold', fontFamily:'Gill Sans'}}
+                     onClick = {()=>this.changeTab('pure sunken')}>Pure Sunken</Tab>
+                    <Tab style={{fontWeight:'bold', fontFamily:'Gill Sans'}}
+                     onClick = {()=>this.changeTab('pure craboid')}>Pure Craboid</Tab>
+                    <Tab style={{fontWeight:'bold', fontFamily:'Gill Sans'}}
+                     onClick = {()=>this.changeTab('pure ruined')}>Pure Ruined</Tab>
+                    <Tab style={{fontWeight:'bold', fontFamily:'Gill Sans'}}
+                     onClick = {()=>this.changeTab('pure gem')}>Pure Gem</Tab>
+                    <Tab style={{fontWeight:'bold', fontFamily:'Gill Sans'}}
+                     onClick = {()=>this.changeTab('pure organic')}>Pure Organic</Tab>
                     </TabList>
                 </Tabs>
             
