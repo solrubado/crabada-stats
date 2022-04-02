@@ -1,0 +1,21 @@
+.filters{
+    color:#ffffff;
+    font-family:'Gill Sans';
+    font-size: 20px;
+    padding-right: 10px;
+    font-weight: 400;
+}
+
+.cross{
+    color:#fc712c;
+    font-family:'Gill Sans';
+    text-align:right;
+    padding:2;
+    align-content:center;
+}
+
+.rule{
+    color:#ffffff;
+    font-family:'Gill Sans';
+    padding-right: 10px;
+}
