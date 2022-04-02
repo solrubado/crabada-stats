@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
         padding: '2px',
     },
     quantityFormControl: {
-        minWidth: 50,
+        width: 60,
         margin: 10,
         padding: '2px',
     },
@@ -20,8 +20,9 @@ const useStyles = makeStyles(theme => ({
 const Filters = ({ onFilterChanged }) => {
     const classes = useStyles();
     const [selectedClass, setSelectedClass] = useState('');
-    const [subclasses, setSubclasses] = useState([])
-    const [selectedSubClass, setSelectedSubclass] = useState('');
+    const [subclasses, setSubclasses] = useState([]);
+    const [selectedSubclass, setSelectedSubclass] = useState('');
+    const [selectedDnaSubClass, setSelectedDnaSubclass] = useState('');
     const [selectedQuantity, setSelectedQuantity] = useState(0);
     const [selectedPincer, setSelectedPincer] = useState('')
     const [selectedEyes, setSelectedEyes] = useState('')
@@ -31,7 +32,7 @@ const Filters = ({ onFilterChanged }) => {
     const [selectedShell, setSelectedShell] = useState('')
 
     const handleNewFilter = () => {
-        onFilterChanged(selectedClass, selectedSubClass, selectedQuantity, selectedPincer, selectedEyes,
+        onFilterChanged(selectedClass, selectedSubclass, selectedDnaSubClass, selectedQuantity, selectedPincer, selectedEyes,
             selectedMouth, selectedBody, selectedHorn, selectedShell)
     }
     const handleClassChange = (e) => {
@@ -40,10 +41,17 @@ const Filters = ({ onFilterChanged }) => {
         findSubclasses(selectedClass)
     }
 
+    const handleDnaSubclassChange = (e) => {
+        if (e.target.value === '') {
+            setSelectedDnaSubclass('')
+            setSelectedQuantity(0)
+        }
+        setSelectedDnaSubclass(e.target.value)
+    }
+
     const handleSubclassChange = (e) => {
         if (e.target.value === '') {
             setSelectedSubclass('')
-            setSelectedQuantity(0)
         }
         setSelectedSubclass(e.target.value)
     }
@@ -83,6 +91,15 @@ const Filters = ({ onFilterChanged }) => {
                 <FormControl className={classes.formControl}>
                     <InputLabel>Subclasses</InputLabel>
                     <Select onChange={handleSubclassChange}>
+                        {subclasses.map(s => {
+                            return (<MenuItem key={s.subclass} value={s.subclass}>{s.subclass}</MenuItem>)
+                        })}
+                    </Select>
+                </FormControl>
+
+                <FormControl className={classes.formControl}>
+                    <InputLabel>DNA</InputLabel>
+                    <Select onChange={handleDnaSubclassChange}>
                         {subclasses.map(s => {
                             return (<MenuItem key={s.subclass} value={s.subclass}>{s.subclass}</MenuItem>)
                         })}

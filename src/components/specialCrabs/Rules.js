@@ -12,7 +12,10 @@ const Rules = ({ rules, onFilterChanged, removeRule }) => {
         var text = rule.class
 
         if(rule.subclass){
-            text+= ` / ${rule.subclass}`
+            text+= ` - ${rule.subclass}`
+        }
+        if(rule.dnaSubclass){
+            text+= ` / ${rule.dnaSubclass}`
         }
 
         if(rule.quantity){

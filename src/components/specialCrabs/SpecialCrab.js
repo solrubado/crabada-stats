@@ -15,7 +15,8 @@ const SpecialCrab = ({ crabadas }) => {
     const searchRules = [
         {
             class: 'PRIME',
-            subclass: 'Fantom',
+            subclass: '',
+            dnaSubclass: 'Fantom',
             quantity: 9,
             pincer: '',
             eyes: '',
@@ -26,7 +27,8 @@ const SpecialCrab = ({ crabadas }) => {
         },
         {
             class: 'PRIME',
-            subclass: 'Avalanche',
+            subclass: '',
+            dnaSubclass: 'Avalanche',
             quantity: 6,
             pincer: '',
             eyes: '',
@@ -37,7 +39,8 @@ const SpecialCrab = ({ crabadas }) => {
         },
         {
             class: 'RUINED',
-            subclass: 'Crauldron',
+            subclass: '',
+            dnaSubclass: 'Crauldron',
             quantity: 9,
             pincer: '',
             eyes: '',
@@ -47,18 +50,17 @@ const SpecialCrab = ({ crabadas }) => {
             shell: ''
         }
     ]
-
     const [rules, setRules] = useState(searchRules)
     const [crabsData, setCrabsData] = useState([])
-
     const crabsInfo = []
 
-    const searchCrabs = (selectedClass, selectedSubClass, selectedQuantity, selectedPincer, selectedEyes,
+    const searchCrabs = (selectedClass, selectedSubclass, selectedDnaSubclass, selectedQuantity, selectedPincer, selectedEyes,
         selectedMouth, selectedBody, selectedHorn, selectedShell) => {
         const newRules = [...rules]
         newRules.push({
             class: selectedClass,
-            subclass: selectedSubClass,
+            subclass: selectedSubclass,
+            dnaSubclass: selectedDnaSubclass,
             quantity: selectedQuantity,
             pincer: selectedPincer,
             eyes: selectedEyes,
@@ -90,32 +92,15 @@ const SpecialCrab = ({ crabadas }) => {
 
                     if (rules.length > 0) {
                         rules.forEach(rule => {
-                            console.log(specialCrabadas)
                             const alreadyFound = specialCrabadas.find(specialCrab => specialCrab.id === crab.id);
                             if (crab.class_name === rule.class && !alreadyFound) {
-                                const sc = subclassList.find(sub => sub.subclass === rule.subclass);
-                                if (sc) {
-                                    const dna = decDna.filter(dna => dna === sc.id).length;
-                                    if (dna >= rule.quantity && checkCrabParts(decDna, rule)) {
-                                        const foundCrab = {
-                                            id: crab.id,
-                                            searchedSubclass: rule.subclass,
-                                            quantity: dna
-                                        }
-
-                                        specialCrabadas.push(foundCrab)
+                                if (rule.subclass) {
+                                    const sc = subclassList.find(sub => sub.subclass === rule.subclass);
+                                    if (sc.id === crab.crabada_subclass) {
+                                        checkDnaAndParts(crab, decDna, rule, specialCrabadas)
                                     }
                                 } else {
-                                    if (checkCrabParts(decDna, rule)) {
-                                        const foundCrab = {
-                                            id: crab.id,
-                                            searchedSubclass: rule.subclass,
-                                            quantity: null
-                                        }
-
-                                        specialCrabadas.push(foundCrab)
-
-                                    }
+                                    checkDnaAndParts(crab, decDna, rule, specialCrabadas)
                                 }
 
                             }
@@ -133,6 +118,33 @@ const SpecialCrab = ({ crabadas }) => {
         findSpecialCrab();
     }, [crabadas, rules])
 
+    const checkDnaAndParts = (crab, decDna, rule, specialCrabadas) => {
+        const dnaSc = subclassList.find(sub => sub.subclass === rule.dnaSubclass);
+        if (dnaSc) {
+            const dna = decDna.filter(dna => dna === dnaSc.id).length;
+            if (dna >= rule.quantity && checkCrabParts(decDna, rule)) {
+                const foundCrab = {
+                    id: crab.id,
+                    searchedSubclass: rule.dnaSubclass,
+                    quantity: dna
+                }
+
+                specialCrabadas.push(foundCrab)
+            }
+        } else {
+            if (checkCrabParts(decDna, rule)) {
+                const foundCrab = {
+                    id: crab.id,
+                    searchedSubclass: rule.dnaSubclass,
+                    quantity: null
+                }
+
+                specialCrabadas.push(foundCrab)
+
+            }
+        }
+    }
+
     const checkCrabParts = (decDna, rule) => {
         const checks = []
         const pincerSc = subclassList.find(sub => sub.subclass === rule.pincer);
@@ -148,38 +160,38 @@ const SpecialCrab = ({ crabadas }) => {
         }
 
         if (pincerSc) {
-            const pincerCheck = (decDna[17] == pincerSc.id || decDna[16] == pincerSc.id || decDna[15] == pincerSc.id)
+            const pincerCheck = (decDna[17] === pincerSc.id || decDna[16] === pincerSc.id || decDna[15] === pincerSc.id)
             checks.push(pincerCheck)
         }
 
         if (eyesSc) {
-            const eyesCheck = (decDna[12] == eyesSc.id || decDna[13] == eyesSc.id || decDna[14] == eyesSc.id)
+            const eyesCheck = (decDna[12] === eyesSc.id || decDna[13] === eyesSc.id || decDna[14] === eyesSc.id)
             checks.push(eyesCheck)
         }
 
         if (mouthSc) {
-            const mouthCheck = (decDna[9] == mouthSc.id || decDna[10] == mouthSc.id || decDna[11] == mouthSc.id)
+            const mouthCheck = (decDna[9] === mouthSc.id || decDna[10] === mouthSc.id || decDna[11] === mouthSc.id)
             checks.push(mouthCheck)
         }
 
         if (bodySc) {
-            const bodyCheck = (decDna[8] == bodySc.id || decDna[7] == bodySc.id || decDna[6] == bodySc.id)
+            const bodyCheck = (decDna[8] === bodySc.id || decDna[7] === bodySc.id || decDna[6] === bodySc.id)
             checks.push(bodyCheck)
         }
 
         if (hornSc) {
-            const hornCheck = (decDna[3] == hornSc.id || decDna[4] == hornSc.id || decDna[5] == hornSc.id)
+            const hornCheck = (decDna[3] === hornSc.id || decDna[4] === hornSc.id || decDna[5] === hornSc.id)
             checks.push(hornCheck)
         }
 
         if (shellSc) {
-            const shellCheck = (decDna[0] == shellSc.id || decDna[1] == shellSc.id || decDna[2] == shellSc.id)
+            const shellCheck = (decDna[0] === shellSc.id || decDna[1] === shellSc.id || decDna[2] === shellSc.id)
             checks.push(shellCheck)
         }
 
         const invalidCrab = checks.find(c => c === false)
 
-        return invalidCrab != false
+        return invalidCrab !== false
     }
 
     useEffect(() => {
@@ -195,7 +207,8 @@ const SpecialCrab = ({ crabadas }) => {
 
                     crabsInfo.push(crabsInf)
                     if (crabsInfo.length === specialCrabadas.length) {
-                        setCrabsData(crabsInfo)
+                        const sortedCrabadasInfo = crabsInfo.sort((a, b) => (a.data.price > b.data.price) ? 1 : -1) 
+                        setCrabsData(sortedCrabadasInfo)
                     }
                 })
             } else {
@@ -243,7 +256,7 @@ const SpecialCrab = ({ crabadas }) => {
     console.log(rules)
     return (
         <div style={{ margin: '15px', marginBottom: '40px' }}>
-            <p style={{ marginTop:'50px', fontSize: 20, color: '#f5bf42', fontWeight: 'bold', fontFamily: 'Gill Sans', textAlign: 'center' }}>SPECIAL CRABS</p>
+            <p style={{ marginTop: '50px', fontSize: 20, color: '#f5bf42', fontWeight: 'bold', fontFamily: 'Gill Sans', textAlign: 'center' }}>SPECIAL CRABS</p>
             <Rules rules={rules} onFilterChanged={searchCrabs} removeRule={removeRule} />
             <Grid container>
                 {renderedCrabadas()}
