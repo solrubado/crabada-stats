@@ -57,6 +57,11 @@ const SpecialCrab = ({ crabadas }) => {
     const searchCrabs = (selectedClass, selectedSubclass, selectedDnaSubclass, selectedQuantity, selectedPincer, selectedEyes,
         selectedMouth, selectedBody, selectedHorn, selectedShell) => {
         const newRules = [...rules]
+        if(selectedSubclass && !selectedDnaSubclass){
+            selectedDnaSubclass = selectedSubclass
+            selectedQuantity = 0
+        }
+        
         newRules.push({
             class: selectedClass,
             subclass: selectedSubclass,
@@ -248,7 +253,7 @@ const SpecialCrab = ({ crabadas }) => {
             }))
         } else {
             return <div>
-                <p style={{ fontSize: 15, color: '#ffffff', fontFamily: 'Gill Sans', textAlign: 'center' }}>No matching crabs found</p></div>
+                <p style={{ fontSize: 15, color: '#ffffff', fontFamily: 'Arial', textAlign: 'center' }}>No matching crabs found</p></div>
         }
 
     }
@@ -256,7 +261,7 @@ const SpecialCrab = ({ crabadas }) => {
     console.log(rules)
     return (
         <div style={{ margin: '15px', marginBottom: '40px' }}>
-            <p style={{ marginTop: '50px', fontSize: 20, color: '#f5bf42', fontWeight: 'bold', fontFamily: 'Gill Sans', textAlign: 'center' }}>SPECIAL CRABS</p>
+            <p style={{ marginTop: '50px', fontSize: 20, color: '#f5bf42', fontWeight: 'bold', fontFamily: 'Arial', textAlign: 'center' }}>SPECIAL CRABS</p>
             <Rules rules={rules} onFilterChanged={searchCrabs} removeRule={removeRule} />
             <Grid container>
                 {renderedCrabadas()}

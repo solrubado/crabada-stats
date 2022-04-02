@@ -91,7 +91,7 @@ const EnhancedTableHead = (props) => {
     const renderedTableCells = headCells.map((headCell) => {
         return(
             <TableCell
-                style={{fontWeight:'bold', fontFamily:'Gill Sans'}}
+                style={{fontWeight:'bold', fontFamily:'Arial'}}
                 key={headCell.id}
                 align={headCell.numeric ? 'right' : 'left'}
                 padding={headCell.disablePadding ? 'none' : 'normal'}

@@ -19,8 +19,7 @@ const CrabCard = ({id, photo, className, price, subclass, searchedSubclass, quan
                     <img loading="lazy" alt={`Crabada ${id}`} width="200" height="200" src={`https://photos.crabada.com/${photo}`}/>
                     <p className="crab-id">Crab {id}</p>
                     <p className="crab-class">{className.toUpperCase()} - {sc.subclass}</p>
-                    {quantity && 
-                    <p className="crab-searched-class">{searchedSubclass} ({quantity}/18)</p>}
+                    <p className="crab-searched-class">{searchedSubclass} ({quantity}/18)</p>
                 </Card>
             </Box>
         </CardActionArea>

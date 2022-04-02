@@ -1,11 +1,11 @@
 body {
   margin: 0;
-  font-family: 'Gill Sans';
+  font-family: 'Arial';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: 'Gill Sans',
+  font-family: 'Arial',
   monospace;
 }

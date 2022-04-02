@@ -75,7 +75,7 @@ const StatsTable = () => {
 
     const renderedTabs = tabs.map( tab => {
         return( 
-            <Tab style={{fontWeight:'bold', fontFamily:'Gill Sans'}}
+            <Tab style={{fontWeight:'bold', fontFamily:'Arial'}}
             onClick = {()=> changeTab(tab)}>{tab.toLocaleUpperCase()}</Tab>
         )
     })
